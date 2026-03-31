@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Politécnico Sumayya - Matola, Maputo</title>
+    <meta name="description" content="Instituto Politécnico Sumayya - Educação de qualidade em Matola, Maputo. Cursos técnicos e profissionalizantes.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+    
+    <style>
+        /* Estilos específicos do site público */
+        .site-header {
+            background: var(--azul-escuro);
+            color: var(--branco);
+            padding: var(--espaco-sm) 0;
+        }
+        
+        .site-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .site-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--espaco-md);
+        }
+        
+        .site-logo img {
+            height: 50px;
+        }
+        
+        .site-logo-text h1 {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .site-logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .site-nav {
+            display: flex;
+            gap: var(--espaco-lg);
+        }
+        
+        .site-nav a {
+            color: var(--branco);
+            font-size: 0.9rem;
+            padding: var(--espaco-sm) 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color var(--transicao-rapida);
+        }
+        
+        .site-nav a:hover {
+            border-bottom-color: var(--branco);
+        }
+        
+        .btn-portal {
+            background: var(--branco);
+            color: var(--azul-escuro);
+            padding: var(--espaco-sm) var(--espaco-md);
+            border-radius: var(--raio-pequeno);
+            font-weight: 500;
+            transition: all var(--transicao-rapida);
+        }
+        
+        .btn-portal:hover {
+            background: var(--azul-claro);
+            color: var(--branco);
+            border-bottom-color: transparent;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 35, 126, 0.85), rgba(26, 35, 126, 0.9)),
+                        url('assets/images/hero-bg.jpg') center/cover no-repeat;
+            color: var(--branco);
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--espaco-md);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto var(--espaco-xl);
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: var(--espaco-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-hero-primary {
+            background: var(--branco);
+            color: var(--azul-escuro);
+            padding: 16px 32px;
+            border-radius: var(--raio-pequeno);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all var(--transicao-rapida);
+        }
+        
+        .btn-hero-primary:hover {
+            background: var(--azul-claro);
+            color: var(--branco);
+            transform: translateY(-2px);
+        }
+        
+        .btn-hero-secondary {
+            background: transparent;
+            color: var(--branco);
+            padding: 16px 32px;
+            border-radius: var(--raio-pequeno);
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid var(--branco);
+            transition: all var(--transicao-rapida);
+        }
+        
+        .btn-hero-secondary:hover {
+            background: var(--branco);
+            color: var(--azul-escuro);
+        }
+        
+        /* Seções */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: var(--espaco-xxl);
+        }
+        
+        .section-title h3 {
+            font-size: 2rem;
+            color: var(--azul-escuro);
+            margin-bottom: var(--espaco-sm);
+        }
+        
+        .section-title p {
+            color: var(--cinza-texto);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Cards de cursos */
+        .cursos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--espaco-xl);
+        }
+        
+        .curso-card {
+            background: var(--branco);
+            border-radius: var(--raio-medio);
+            box-shadow: var(--sombra-card);
+            overflow: hidden;
+            transition: transform var(--transicao-rapida), box-shadow var(--transicao-rapida);
+        }
+        
+        .curso-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--sombra-card-hover);
+        }
+        
+        .curso-icon {
+            height: 120px;
+            background: var(--azul-escuro);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .curso-icon svg {
+            width: 48px;
+            height: 48px;
+            color: var(--branco);
+        }
+        
+        .curso-content {
+            padding: var(--espaco-lg);
+        }
+        
+        .curso-content h4 {
+            font-size: 1.2rem;
+            color: var(--azul-escuro);
+            margin-bottom: var(--espaco-sm);
+        }
+        
+        .curso-content p {
+            color: var(--cinza-texto);
+            font-size: 0.9rem;
+            margin-bottom: var(--espaco-md);
+        }
+        
+        .curso-content a {
+            color: var(--azul-claro);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--espaco-xs);
+        }
+        
+        /* Estatísticas */
+        .stats-section {
+            background: var(--azul-escuro);
+            color: var(--branco);
+            padding: 60px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--espaco-xl);
+            text-align: center;
+        }
+        
+        .stat-item h4 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--espaco-xs);
+        }
+        
+        .stat-item p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+        
+        /* Contato */
+        .contato-section {
+            background: var(--cinza-claro);
+        }
+        
+        .contato-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--espaco-xl);
+        }
+        
+        .contato-info h4 {
+            font-size: 1.3rem;
+            color: var(--azul-escuro);
+            margin-bottom: var(--espaco-lg);
+        }
+        
+        .contato-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--espaco-md);
+            margin-bottom: var(--espaco-lg);
+        }
+        
+        .contato-item svg {
+            width: 24px;
+            height: 24px;
+            color: var(--azul-claro);
+            flex-shrink: 0;
+        }
+        
+        .contato-item strong {
+            display: block;
+            color: var(--azul-escuro);
+            margin-bottom: var(--espaco-xs);
+        }
+        
+        .contato-item p {
+            color: var(--cinza-texto);
+        }
+        
+        .contato-item a {
+            color: var(--azul-claro);
+        }
+        
+        /* Footer */
+        .site-footer {
+            background: #0d1442;
+            color: var(--branco);
+            padding: 40px 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--espaco-lg);
+        }
+        
+        .footer-info p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin-bottom: var(--espaco-xs);
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: var(--espaco-md);
+        }
+        
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transicao-rapida);
+        }
+        
+        .footer-social a:hover {
+            background: var(--azul-claro);
+        }
+        
+        .footer-social svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background: var(--whatsapp);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            z-index: 500;
+            transition: all var(--transicao-rapida);
+        }
+        
+        .whatsapp-float:hover {
+            background: var(--whatsapp-hover);
+            transform: scale(1.05);
+        }
+        
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            color: var(--branco);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .site-nav {
+                display: none;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .cursos-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contato-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="site-header-content">
+                <div class="site-logo">
+                    <img src="assets/images/logo-sumayya.png" alt="Instituto Politécnico Sumayya">
+                    <div class="site-logo-text">
+                        <h1>Instituto Politécnico Sumayya</h1>
+                        <p>Excelência em Educação Técnica</p>
+                    </div>
+                </div>
+                <nav class="site-nav">
+                    <a href="#inicio">Início</a>
+                    <a href="#cursos">Cursos</a>
+                    <a href="#sobre">Sobre</a>
+                    <a href="#contato">Contato</a>
+                    <a href="portal/aluno/login.html" class="btn-portal">Portal do Aluno</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h2>Construindo o Futuro Através da Educação</h2>
+            <p>O Instituto Politécnico Sumayya oferece formação técnica de qualidade, preparando jovens para o mercado de trabalho com excelência e dedicação.</p>
+            <div class="hero-buttons">
+                <a href="portal/aluno/login.html" class="btn-hero-primary">Acessar Portal do Aluno</a>
+                <a href="#cursos" class="btn-hero-secondary">Conhecer Cursos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cursos Section -->
+    <section class="section" id="cursos">
+        <div class="container">
+            <div class="section-title">
+                <h3>Nossos Cursos</h3>
+                <p>Oferecemos formação técnica em diversas áreas para preparar você para o mercado de trabalho</p>
+            </div>
+            <div class="cursos-grid">
+                <div class="curso-card">
+                    <div class="curso-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                    </div>
+                    <div class="curso-content">
+                        <h4>Informática</h4>
+                        <p>Desenvolvimento de software, redes de computadores e manutenção de hardware. Prepare-se para a era digital.</p>
+                        <a href="#">Saiba mais →</a>
+                    </div>
+                </div>
+                <div class="curso-card">
+                    <div class="curso-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                        </svg>
+                    </div>
+                    <div class="curso-content">
+                        <h4>Mecânica</h4>
+                        <p>Mecânica geral, automotiva e industrial. Aprenda a trabalhar com máquinas e equipamentos diversos.</p>
+                        <a href="#">Saiba mais →</a>
+                    </div>
+                </div>
+                <div class="curso-card">
+                    <div class="curso-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="curso-content">
+                        <h4>Eletricidade</h4>
+                        <p>Instalações elétricas residenciais e industriais. Domine os princípios da eletricidade e segurança.</p>
+                        <a href="#">Saiba mais →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estatísticas -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h4>500+</h4>
+                    <p>Alunos Matriculados</p>
+                </div>
+                <div class="stat-item">
+                    <h4>30+</h4>
+                    <p>Professores Qualificados</p>
+                </div>
+                <div class="stat-item">
+                    <h4>15+</h4>
+                    <p>Anos de Experiência</p>
+                </div>
+                <div class="stat-item">
+                    <h4>95%</h4>
+                    <p>Taxa de Aprovação</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato Section -->
+    <section class="section contato-section" id="contato">
+        <div class="container">
+            <div class="section-title">
+                <h3>Entre em Contato</h3>
+                <p>Estamos à disposição para atender você e esclarecer suas dúvidas</p>
+            </div>
+            <div class="contato-grid">
+                <div class="contato-info">
+                    <h4>Informações de Contato</h4>
+                    <div class="contato-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <div>
+                            <strong>Endereço</strong>
+                            <p>Avenida 25 de Setembro<br>Matola, Maputo, 1114</p>
+                        </div>
+                    </div>
+                    <div class="contato-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <div>
+                            <strong>Telefone / WhatsApp</strong>
+                            <p><a href="tel:+258874163000">87 416 3000</a></p>
+                        </div>
+                    </div>
+                    <div class="contato-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <div>
+                            <strong>E-mail</strong>
+                            <p><a href="mailto:secretaria@sumayya.edu.mz">secretaria@sumayya.edu.mz</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contato-info">
+                    <h4>Horário de Funcionamento</h4>
+                    <div class="contato-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <div>
+                            <strong>Secretaria</strong>
+                            <p>Segunda a Sexta: 07:30 - 17:00<br>Sábado: 08:00 - 12:00</p>
+                        </div>
+                    </div>
+                    <div class="contato-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                        </svg>
+                        <div>
+                            <strong>Aulas</strong>
+                            <p>Manhã: 07:30 - 12:30<br>Tarde: 13:30 - 17:30</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p><strong>Instituto Politécnico Sumayya</strong></p>
+                    <p>Avenida 25 de Setembro, Matola, Maputo, 1114</p>
+                    <p>Tel: 87 416 3000 | Email: secretaria@sumayya.edu.mz</p>
+                    <p>&copy; 2024 Todos os direitos reservados</p>
+                </div>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/258874163000" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <!-- App JS -->
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
