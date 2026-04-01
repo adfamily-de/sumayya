@@ -1,0 +1,67 @@
+/* Variáveis CSS - Instituto Politécnico Sumayya */
+/* Cores e valores reutilizáveis para fácil manutenção */
+
+:root {
+    /* Cores principais */
+    --azul-escuro: #1a237e;
+    --azul-claro: #3949ab;
+    --branco: #ffffff;
+    --cinza-claro: #f5f5f5;
+    --cinza-medio: #e0e0e0;
+    --cinza-texto: #616161;
+    
+    /* Cores de status */
+    --verde: #4caf50;
+    --verde-claro: #e8f5e9;
+    --vermelho: #f44336;
+    --vermelho-claro: #ffebee;
+    --laranja: #ff9800;
+    --laranja-claro: #fff3e0;
+    --azul-info: #2196f3;
+    --azul-info-claro: #e3f2fd;
+    
+    /* WhatsApp */
+    --whatsapp: #25d366;
+    --whatsapp-hover: #128c7e;
+    
+    /* Sombras */
+    --sombra-card: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --sombra-card-hover: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --sombra-login: 0 4px 20px rgba(0, 0, 0, 0.15);
+    --sombra-input-focus: 0 0 0 3px rgba(57, 73, 171, 0.1);
+    
+    /* Bordas */
+    --raio-pequeno: 4px;
+    --raio-medio: 8px;
+    --raio-grande: 12px;
+    
+    /* Espaçamento */
+    --espaco-xs: 4px;
+    --espaco-sm: 8px;
+    --espaco-md: 16px;
+    --espaco-lg: 24px;
+    --espaco-xl: 32px;
+    --espaco-xxl: 48px;
+    
+    /* Layout */
+    --largura-sidebar: 250px;
+    --altura-header: 64px;
+    
+    /* Transições */
+    --transicao-rapida: 0.15s ease;
+    --transicao-normal: 0.3s ease;
+    
+    /* Z-index */
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-modal: 300;
+    --z-tooltip: 400;
+    --z-whatsapp: 500;
+}
+
+/* Variáveis para modo escuro (futuro) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Implementar se necessário */
+    }
+}

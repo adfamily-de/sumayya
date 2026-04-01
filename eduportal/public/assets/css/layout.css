@@ -1,0 +1,316 @@
+/* Layout CSS - Instituto Politécnico Sumayya */
+/* Estruturas de página e grids */
+
+/* Container principal */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--espaco-lg);
+}
+
+.container-fluid {
+    width: 100%;
+    padding: 0 var(--espaco-lg);
+}
+
+/* Layout com sidebar */
+.layout-sidebar {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: var(--largura-sidebar);
+    background: var(--azul-escuro);
+    color: var(--branco);
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: var(--z-sticky);
+    transition: transform var(--transicao-normal);
+}
+
+.sidebar-header {
+    padding: var(--espaco-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.sidebar-logo {
+    max-width: 120px;
+    margin: 0 auto var(--espaco-md);
+}
+
+.sidebar-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: var(--espaco-xs);
+}
+
+.sidebar-subtitle {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.sidebar-nav {
+    padding: var(--espaco-md) 0;
+}
+
+.sidebar-nav-item {
+    display: flex;
+    align-items: center;
+    padding: var(--espaco-md) var(--espaco-lg);
+    color: rgba(255, 255, 255, 0.9);
+    transition: all var(--transicao-rapida);
+    border-left: 3px solid transparent;
+}
+
+.sidebar-nav-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--branco);
+}
+
+.sidebar-nav-item.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-left-color: var(--branco);
+    color: var(--branco);
+}
+
+.sidebar-nav-item svg {
+    width: 20px;
+    height: 20px;
+    margin-right: var(--espaco-md);
+    flex-shrink: 0;
+}
+
+.sidebar-footer {
+    padding: var(--espaco-md) var(--espaco-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+    opacity: 0.7;
+    text-align: center;
+}
+
+/* Conteúdo principal */
+.main-content {
+    flex: 1;
+    margin-left: var(--largura-sidebar);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    background: var(--branco);
+    height: var(--altura-header);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--espaco-lg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-md);
+}
+
+.menu-toggle {
+    display: none;
+    padding: var(--espaco-sm);
+    border-radius: var(--raio-pequeno);
+}
+
+.menu-toggle:hover {
+    background: var(--cinza-claro);
+}
+
+.header-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--azul-escuro);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-md);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-sm);
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--azul-claro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--branco);
+    font-weight: 600;
+}
+
+.user-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.user-role {
+    font-size: 0.75rem;
+    color: var(--cinza-texto);
+}
+
+/* Conteúdo da página */
+.page-content {
+    flex: 1;
+    padding: var(--espaco-lg);
+    background: var(--cinza-claro);
+}
+
+.page-header {
+    margin-bottom: var(--espaco-lg);
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--azul-escuro);
+    margin-bottom: var(--espaco-sm);
+}
+
+.page-subtitle {
+    color: var(--cinza-texto);
+    font-size: 0.95rem;
+}
+
+/* Footer */
+.footer {
+    background: var(--branco);
+    padding: var(--espaco-md) var(--espaco-lg);
+    border-top: 1px solid var(--cinza-medio);
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--cinza-texto);
+}
+
+.footer p {
+    margin-bottom: var(--espaco-xs);
+}
+
+/* Grid de cards */
+.grid {
+    display: grid;
+    gap: var(--espaco-lg);
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Login layout */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(rgba(26, 35, 126, 0.7), rgba(26, 35, 126, 0.8)),
+                url('../images/hero-bg.jpg') center/cover no-repeat;
+    padding: var(--espaco-lg);
+}
+
+.login-card {
+    background: var(--branco);
+    border-radius: var(--raio-medio);
+    box-shadow: var(--sombra-login);
+    width: 100%;
+    max-width: 420px;
+    padding: var(--espaco-xxl);
+}
+
+.login-logo {
+    text-align: center;
+    margin-bottom: var(--espaco-xl);
+}
+
+.login-logo img {
+    max-width: 100px;
+    margin: 0 auto var(--espaco-md);
+}
+
+.login-logo h1 {
+    font-size: 1.5rem;
+    color: var(--azul-escuro);
+    margin-bottom: var(--espaco-xs);
+}
+
+.login-logo p {
+    color: var(--cinza-texto);
+    font-size: 0.9rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .header-title {
+        display: none;
+    }
+    
+    .user-name {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .container,
+    .container-fluid {
+        padding: 0 var(--espaco-md);
+    }
+    
+    .page-content {
+        padding: var(--espaco-md);
+    }
+    
+    .login-card {
+        padding: var(--espaco-lg);
+    }
+}
